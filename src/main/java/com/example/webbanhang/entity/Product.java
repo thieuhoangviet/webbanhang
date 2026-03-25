@@ -1,10 +1,13 @@
 package com.example.webbanhang.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -33,14 +36,21 @@ public class Product {
 
     @Min(value = 0, message = "Số lượng không được âm")
     @Column(nullable = false)
+    @Builder.Default
     private Integer quantity = 0;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private String imageUrl; // Ảnh chính (legacy, vẫn giữ để tương thích)
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
+    @JsonIgnoreProperties("products")
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OrderBy("sortOrder ASC")
+    @Builder.Default
+    private List<ProductImage> images = new ArrayList<>();
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

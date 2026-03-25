@@ -1,0 +1,152 @@
+.app {
+  min-height: 100vh;
+  background: #11111b;
+}
+
+.app-header {
+  background: #1e1e2e;
+  border-bottom: 1px solid #313244;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.cart-icon-wrapper:hover {
+  background: #313244;
+}
+
+.cart-icon {
+  font-size: 1.6rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #f38ba8;
+  color: #1e1e2e;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-icon {
+  font-size: 1.8rem;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #cdd6f4;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #181825;
+  border: 1.5px solid #313244;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.search-form:focus-within {
+  border-color: #89b4fa;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.55rem 1rem;
+  color: #cdd6f4;
+  font-size: 0.9rem;
+  width: 240px;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: #45475a;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #89b4fa;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background: #313244;
+}
+
+.app-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+}

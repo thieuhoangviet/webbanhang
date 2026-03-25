@@ -37,3 +37,10 @@ replay_pid*
 
 # Application properties with secrets
 src/main/resources/application-local.properties
+
+# Uploaded files
+uploads/
+
+# Frontend dependencies
+frontend/node_modules/
+frontend/dist/
