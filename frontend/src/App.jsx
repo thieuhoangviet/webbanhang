@@ -14,6 +14,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import HomePage from './components/HomePage';
 import { WishlistProvider } from './context/WishlistContext';
 import WishlistPage from './pages/WishlistPage';
+import BrowsePage from './components/BrowsePage';
 import './App.css';
 
 const AppContent = () => {
@@ -150,18 +151,13 @@ const AppContent = () => {
       </header>
 
       <main className="app-main-full">
-        <CategoryFilter
-          selectedCategoryId={selectedCategoryId}
-          onSelectCategory={handleCategorySelect}
-        />
         {selectedCategoryId || searchQuery ? (
-          <div className="app-main">
-            <ProductList
-              selectedCategoryId={selectedCategoryId}
-              searchQuery={searchQuery}
-              onBuyNow={goToCheckout}
-            />
-          </div>
+          <BrowsePage
+            selectedCategoryId={selectedCategoryId}
+            onCategoryChange={handleCategorySelect}
+            searchQuery={searchQuery}
+            onBuyNow={goToCheckout}
+          />
         ) : (
           <HomePage onBuyNow={goToCheckout} />
         )}
