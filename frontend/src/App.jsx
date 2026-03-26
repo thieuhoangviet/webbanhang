@@ -15,22 +15,26 @@ import HomePage from './components/HomePage';
 import { WishlistProvider } from './context/WishlistContext';
 import WishlistPage from './pages/WishlistPage';
 import BrowsePage from './components/BrowsePage';
+import SearchBar from './components/SearchBar';
 import './App.css';
 
 const AppContent = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [inputValue, setInputValue] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const { totalItems } = useCart();
   const { wishlist } = useWishlist();
   const { user, logout } = useAuth();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchQuery(inputValue);
+  const handleSearch = (query) => {
+    if (!query) {
+      setSearchQuery('');
+      return;
+    }
+    setSearchQuery(query);
     setSelectedCategoryId(null);
+    setCurrentPage('home');
   };
 
   const handleCategorySelect = (categoryId) => {
@@ -84,16 +88,7 @@ const AppContent = () => {
           <h1>Web Bán Hàng</h1>
         </div>
         <div className="header-right">
-          <form className="search-form" onSubmit={handleSearch}>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Tìm kiếm sản phẩm..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button type="submit" className="search-btn">🔍</button>
-          </form>
+          <SearchBar onSearch={handleSearch} />
 
           {/* Auth nav */}
           <div className="header-auth">
