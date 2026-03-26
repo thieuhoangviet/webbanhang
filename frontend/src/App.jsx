@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import OrdersPage from './pages/OrdersPage';
+import AdminLayout from './pages/admin/AdminLayout';
 import './App.css';
 
 const AppContent = () => {
@@ -56,6 +57,9 @@ const AppContent = () => {
   if (currentPage === 'orders') {
     return <OrdersPage onNavigate={setCurrentPage} />;
   }
+  if (currentPage === 'admin') {
+    return <AdminLayout onNavigate={setCurrentPage} />;
+  }
 
   // Home page
   return (
@@ -87,6 +91,11 @@ const AppContent = () => {
                 <button className="orders-nav-btn" onClick={() => setCurrentPage('orders')}>
                   📋 Đơn hàng
                 </button>
+                {user.role === 'ADMIN' && (
+                  <button className="admin-nav-header-btn" onClick={() => setCurrentPage('admin')}>
+                    ⚙️ Admin
+                  </button>
+                )}
                 <button className="logout-btn-header" onClick={() => { logout(); goToHome(); }}>
                   Đăng xuất
                 </button>

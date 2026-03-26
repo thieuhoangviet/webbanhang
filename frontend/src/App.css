@@ -249,4 +249,21 @@
   background: #45475a;
 }
 
+.admin-nav-header-btn {
+  background: #45475a;
+  border: none;
+  color: #f9e2af;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-nav-header-btn:hover {
+  background: #585b70;
+}
+
+
 

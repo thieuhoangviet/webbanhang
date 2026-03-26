@@ -1,0 +1,155 @@
+/* Admin Layout Sidebar */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+.admin-sidebar {
+  width: 230px;
+  background: #1e1e2e;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #cdd6f4;
+  border-bottom: 1px solid #313244;
+}
+
+.admin-brand span:first-child {
+  font-size: 22px;
+}
+
+.admin-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 12px;
+}
+
+.admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #a6adc8;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.admin-nav-btn:hover {
+  background: #313244;
+  color: #cdd6f4;
+}
+
+.admin-nav-btn.active {
+  background: linear-gradient(135deg, #667eea30, #764ba230);
+  color: #89b4fa;
+  font-weight: 600;
+}
+
+.admin-nav-icon {
+  font-size: 16px;
+}
+
+.admin-sidebar-footer {
+  padding: 16px 12px;
+  border-top: 1px solid #313244;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-goto-store,
+.admin-logout {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.admin-goto-store {
+  background: #313244;
+  color: #a6e3a1;
+}
+
+.admin-goto-store:hover {
+  background: #45475a;
+}
+
+.admin-logout {
+  background: none;
+  color: #a6adc8;
+  border: 1px solid #313244;
+}
+
+.admin-logout:hover {
+  background: #45475a;
+  color: #f38ba8;
+  border-color: #f38ba8;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.admin-forbidden {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.admin-forbidden h2 {
+  font-size: 24px;
+  color: #d32f2f;
+  margin-bottom: 12px;
+}
+
+.admin-forbidden button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 60px;
+  }
+  .admin-brand span:last-child,
+  .admin-nav-btn span:not(.admin-nav-icon),
+  .admin-goto-store,
+  .admin-logout {
+    display: none;
+  }
+  .admin-nav-btn {
+    justify-content: center;
+    padding: 12px;
+  }
+}
