@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import ProductReviews from './ProductReviews';
 import './ProductDetailModal.css';
 
 const BACKEND_URL = 'http://localhost:8080';
@@ -163,6 +164,9 @@ const ProductDetailModal = ({ product, onClose, onBuyNow }) => {
                 ⚡ Mua ngay
               </button>
             </div>
+
+            {/* Reviews */}
+            <ProductReviews productId={product.id} />
           </div>
         </div>
       </div>

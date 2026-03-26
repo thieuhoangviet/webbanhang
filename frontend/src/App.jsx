@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePage';
 import OrdersPage from './pages/OrdersPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import HomePage from './components/HomePage';
+import { WishlistProvider } from './context/WishlistContext';
 import './App.css';
 
 const AppContent = () => {
@@ -161,9 +162,11 @@ const AppContent = () => {
 function App() {
   return (
     <AuthProvider>
-      <CartProvider>
-        <AppContent />
-      </CartProvider>
+      <WishlistProvider>
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
+      </WishlistProvider>
     </AuthProvider>
   );
 }

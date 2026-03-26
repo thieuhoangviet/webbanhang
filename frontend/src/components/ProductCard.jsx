@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import ProductDetailModal from './ProductDetailModal';
 import './ProductCard.css';
 
@@ -28,6 +29,7 @@ const getThumbnail = (product) => {
 
 const ProductCard = ({ product, onBuyNow }) => {
   const { addToCart } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
   const [showDetail, setShowDetail] = useState(false);
 
   const thumbnail = getThumbnail(product);
@@ -57,6 +59,16 @@ const ProductCard = ({ product, onBuyNow }) => {
           {product.images && product.images.length > 1 && (
             <span className="image-count-badge">+{product.images.length - 1} ảnh</span>
           )}
+          {product.salePrice && (
+            <span className="sale-badge">SALE</span>
+          )}
+          <button
+            className={`wishlist-btn ${isInWishlist(product.id) ? 'active' : ''}`}
+            onClick={(e) => { e.stopPropagation(); toggleWishlist(product); }}
+            title={isInWishlist(product.id) ? 'Bỏ yêu thích' : 'Yêu thích'}
+          >
+            {isInWishlist(product.id) ? '❤️' : '🤍'}
+          </button>
         </div>
         <div className="product-info">
           <h3 className="product-name">{product.name}</h3>
@@ -64,7 +76,12 @@ const ProductCard = ({ product, onBuyNow }) => {
             <p className="product-description">{product.description}</p>
           )}
           <div className="product-meta">
-            <span className="product-price">{formatPrice(product.price)}</span>
+            <div className="price-block">
+              <span className="product-price">{formatPrice(product.salePrice || product.price)}</span>
+              {product.salePrice && (
+                <span className="original-price">{formatPrice(product.price)}</span>
+              )}
+            </div>
             <span className={`product-stock ${product.quantity === 0 ? 'out-of-stock' : ''}`}>
               {product.quantity === 0 ? 'Hết hàng' : `Còn ${product.quantity}`}
             </span>
