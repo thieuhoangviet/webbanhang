@@ -8,6 +8,7 @@ import CheckoutPage from './components/CheckoutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import OrdersPage from './pages/OrdersPage';
 import './App.css';
 
 const AppContent = () => {
@@ -52,6 +53,9 @@ const AppContent = () => {
   if (currentPage === 'profile') {
     return <ProfilePage onNavigate={setCurrentPage} />;
   }
+  if (currentPage === 'orders') {
+    return <OrdersPage onNavigate={setCurrentPage} />;
+  }
 
   // Home page
   return (
@@ -79,6 +83,9 @@ const AppContent = () => {
               <div className="user-menu">
                 <button className="user-btn" onClick={() => setCurrentPage('profile')}>
                   👤 {user.fullName?.split(' ').pop()}
+                </button>
+                <button className="orders-nav-btn" onClick={() => setCurrentPage('orders')}>
+                  📋 Đơn hàng
                 </button>
                 <button className="logout-btn-header" onClick={() => { logout(); goToHome(); }}>
                   Đăng xuất

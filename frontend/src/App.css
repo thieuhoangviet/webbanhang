@@ -233,3 +233,20 @@
   color: #f38ba8;
 }
 
+.orders-nav-btn {
+  background: #313244;
+  border: none;
+  color: #a6e3a1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.orders-nav-btn:hover {
+  background: #45475a;
+}
+
+
