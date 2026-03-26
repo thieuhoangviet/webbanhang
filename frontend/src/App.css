@@ -150,3 +150,86 @@
     padding: 1rem;
   }
 }
+
+/* ===== Header Auth ===== */
+.header-auth {
+  display: flex;
+  align-items: center;
+}
+
+.auth-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.login-btn-header {
+  background: transparent;
+  border: 1.5px solid #89b4fa;
+  color: #89b4fa;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn-header:hover {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+.register-btn-header {
+  background: linear-gradient(135deg, #89b4fa, #b4befe);
+  border: none;
+  color: #1e1e2e;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.register-btn-header:hover {
+  opacity: 0.88;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-btn {
+  background: #313244;
+  border: none;
+  color: #cdd6f4;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.user-btn:hover {
+  background: #45475a;
+}
+
+.logout-btn-header {
+  background: none;
+  border: 1px solid #45475a;
+  color: #a6adc8;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn-header:hover {
+  border-color: #f38ba8;
+  color: #f38ba8;
+}
+

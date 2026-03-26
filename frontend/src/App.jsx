@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { CartProvider, useCart } from './context/CartContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import CategoryFilter from './components/CategoryFilter';
 import ProductList from './components/ProductList';
 import CartDrawer from './components/CartDrawer';
 import CheckoutPage from './components/CheckoutPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 import './App.css';
 
 const AppContent = () => {
@@ -11,8 +15,9 @@ const AppContent = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'checkout'
+  const [currentPage, setCurrentPage] = useState('home');
   const { totalItems } = useCart();
+  const { user, logout } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -31,31 +36,28 @@ const AppContent = () => {
     setCurrentPage('checkout');
   };
 
-  const goToHome = () => {
-    setCurrentPage('home');
-    // Không xóa giỏ hàng
-  };
+  const goToHome = () => setCurrentPage('home');
+  const openCart = () => { setCurrentPage('home'); setIsCartOpen(true); };
 
-  const openCart = () => {
-    setCurrentPage('home');
-    setIsCartOpen(true);
-  };
-
-  // Trang thanh toán
+  // Page routing
   if (currentPage === 'checkout') {
-    return (
-      <CheckoutPage
-        onContinueShopping={goToHome}
-        onBackToCart={openCart}
-      />
-    );
+    return <CheckoutPage onContinueShopping={goToHome} onBackToCart={openCart} />;
+  }
+  if (currentPage === 'login') {
+    return <LoginPage onNavigate={setCurrentPage} />;
+  }
+  if (currentPage === 'register') {
+    return <RegisterPage onNavigate={setCurrentPage} />;
+  }
+  if (currentPage === 'profile') {
+    return <ProfilePage onNavigate={setCurrentPage} />;
   }
 
-  // Trang chủ
+  // Home page
   return (
     <div className="app">
       <header className="app-header">
-        <div className="header-brand">
+        <div className="header-brand" onClick={goToHome} style={{ cursor: 'pointer' }}>
           <span className="header-icon">🛍️</span>
           <h1>Web Bán Hàng</h1>
         </div>
@@ -70,6 +72,29 @@ const AppContent = () => {
             />
             <button type="submit" className="search-btn">🔍</button>
           </form>
+
+          {/* Auth nav */}
+          <div className="header-auth">
+            {user ? (
+              <div className="user-menu">
+                <button className="user-btn" onClick={() => setCurrentPage('profile')}>
+                  👤 {user.fullName?.split(' ').pop()}
+                </button>
+                <button className="logout-btn-header" onClick={() => { logout(); goToHome(); }}>
+                  Đăng xuất
+                </button>
+              </div>
+            ) : (
+              <div className="auth-btns">
+                <button className="login-btn-header" onClick={() => setCurrentPage('login')}>
+                  Đăng nhập
+                </button>
+                <button className="register-btn-header" onClick={() => setCurrentPage('register')}>
+                  Đăng ký
+                </button>
+              </div>
+            )}
+          </div>
 
           <div
             className="cart-icon-wrapper"
@@ -107,9 +132,11 @@ const AppContent = () => {
 
 function App() {
   return (
-    <CartProvider>
-      <AppContent />
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
