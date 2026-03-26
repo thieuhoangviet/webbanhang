@@ -40,7 +40,6 @@ const AppContent = () => {
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
     setSearchQuery('');
-    setInputValue('');
   };
 
   const goToCheckout = () => {
@@ -52,7 +51,6 @@ const AppContent = () => {
     setCurrentPage('home');
     setSelectedCategoryId(null);
     setSearchQuery('');
-    setInputValue('');
   };
   const openCart = () => { setCurrentPage('home'); setIsCartOpen(true); };
 
@@ -120,6 +118,7 @@ const AppContent = () => {
               </div>
             )}
           </div>
+        </div>
 
         <div className="header-icons">
           <div
