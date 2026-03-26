@@ -43,6 +43,21 @@ public class ProductController {
         return ResponseEntity.ok(productService.searchProducts(keyword));
     }
 
+    @GetMapping("/featured")
+    public ResponseEntity<List<Product>> getFeaturedProducts() {
+        return ResponseEntity.ok(productService.getFeaturedProducts());
+    }
+
+    @GetMapping("/bestsellers")
+    public ResponseEntity<List<Product>> getBestSellers() {
+        return ResponseEntity.ok(productService.getBestSellers());
+    }
+
+    @GetMapping("/newest")
+    public ResponseEntity<List<Product>> getNewestProducts() {
+        return ResponseEntity.ok(productService.getNewestProducts());
+    }
+
     @PostMapping
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(product));

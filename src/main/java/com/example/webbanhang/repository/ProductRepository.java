@@ -13,4 +13,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     
     @Query("SELECT p FROM Product p WHERE p.quantity > 0")
     List<Product> findAvailableProducts();
+
+    List<Product> findByIsFeaturedTrueOrderByCreatedAtDesc();
+    List<Product> findByIsBestSellerTrueOrderByCreatedAtDesc();
+    List<Product> findTop8ByOrderByCreatedAtDesc();
+    List<Product> findByPriceBetween(java.math.BigDecimal min, java.math.BigDecimal max);
+    List<Product> findByCategoryIdAndPriceBetween(Long categoryId, java.math.BigDecimal min, java.math.BigDecimal max);
 }

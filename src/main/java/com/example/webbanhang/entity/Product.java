@@ -42,6 +42,20 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl; // Ảnh chính (legacy, vẫn giữ để tương thích)
 
+    @Column(name = "sale_price", precision = 15, scale = 2)
+    private java.math.BigDecimal salePrice; // Giá khuyến mãi
+
+    @Size(max = 100)
+    private String brand; // Thương hiệu
+
+    @Column(name = "is_featured")
+    @Builder.Default
+    private Boolean isFeatured = false; // Sản phẩm nổi bật
+
+    @Column(name = "is_best_seller")
+    @Builder.Default
+    private Boolean isBestSeller = false; // Bán chạy
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     @JsonIgnoreProperties("products")

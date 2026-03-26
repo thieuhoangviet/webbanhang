@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import OrdersPage from './pages/OrdersPage';
 import AdminLayout from './pages/admin/AdminLayout';
+import HomePage from './components/HomePage';
 import './App.css';
 
 const AppContent = () => {
@@ -38,7 +39,12 @@ const AppContent = () => {
     setCurrentPage('checkout');
   };
 
-  const goToHome = () => setCurrentPage('home');
+  const goToHome = () => {
+    setCurrentPage('home');
+    setSelectedCategoryId(null);
+    setSearchQuery('');
+    setInputValue('');
+  };
   const openCart = () => { setCurrentPage('home'); setIsCartOpen(true); };
 
   // Page routing
@@ -125,16 +131,22 @@ const AppContent = () => {
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main-full">
         <CategoryFilter
           selectedCategoryId={selectedCategoryId}
           onSelectCategory={handleCategorySelect}
         />
-        <ProductList
-          selectedCategoryId={selectedCategoryId}
-          searchQuery={searchQuery}
-          onBuyNow={goToCheckout}
-        />
+        {selectedCategoryId || searchQuery ? (
+          <div className="app-main">
+            <ProductList
+              selectedCategoryId={selectedCategoryId}
+              searchQuery={searchQuery}
+              onBuyNow={goToCheckout}
+            />
+          </div>
+        ) : (
+          <HomePage onBuyNow={goToCheckout} />
+        )}
       </main>
 
       <CartDrawer

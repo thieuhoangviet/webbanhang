@@ -132,6 +132,10 @@
   padding: 2rem;
 }
 
+.app-main-full {
+  width: 100%;
+}
+
 @media (max-width: 640px) {
   .app-header {
     flex-direction: column;

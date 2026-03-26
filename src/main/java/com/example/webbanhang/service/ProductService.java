@@ -34,6 +34,18 @@ public class ProductService {
         return productRepository.findByNameContainingIgnoreCase(keyword);
     }
 
+    public List<Product> getFeaturedProducts() {
+        return productRepository.findByIsFeaturedTrueOrderByCreatedAtDesc();
+    }
+
+    public List<Product> getBestSellers() {
+        return productRepository.findByIsBestSellerTrueOrderByCreatedAtDesc();
+    }
+
+    public List<Product> getNewestProducts() {
+        return productRepository.findTop8ByOrderByCreatedAtDesc();
+    }
+
     public Product createProduct(Product product) {
         return productRepository.save(product);
     }
@@ -43,6 +55,10 @@ public class ProductService {
         product.setName(productDetails.getName());
         product.setDescription(productDetails.getDescription());
         product.setPrice(productDetails.getPrice());
+        product.setSalePrice(productDetails.getSalePrice());
+        product.setBrand(productDetails.getBrand());
+        product.setIsFeatured(productDetails.getIsFeatured() != null ? productDetails.getIsFeatured() : false);
+        product.setIsBestSeller(productDetails.getIsBestSeller() != null ? productDetails.getIsBestSeller() : false);
         product.setQuantity(productDetails.getQuantity());
         product.setImageUrl(productDetails.getImageUrl());
         product.setCategory(productDetails.getCategory());
