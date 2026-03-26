@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CartProvider, useCart } from './context/CartContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { useWishlist } from './context/WishlistContext';
 import CategoryFilter from './components/CategoryFilter';
 import ProductList from './components/ProductList';
 import CartDrawer from './components/CartDrawer';
@@ -12,6 +13,7 @@ import OrdersPage from './pages/OrdersPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import HomePage from './components/HomePage';
 import { WishlistProvider } from './context/WishlistContext';
+import WishlistPage from './pages/WishlistPage';
 import './App.css';
 
 const AppContent = () => {
@@ -21,6 +23,7 @@ const AppContent = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const { totalItems } = useCart();
+  const { wishlist } = useWishlist();
   const { user, logout } = useAuth();
 
   const handleSearch = (e) => {
@@ -63,6 +66,9 @@ const AppContent = () => {
   }
   if (currentPage === 'orders') {
     return <OrdersPage onNavigate={setCurrentPage} />;
+  }
+  if (currentPage === 'wishlist') {
+    return <WishlistPage onNavigate={setCurrentPage} onBuyNow={goToCheckout} />;
   }
   if (currentPage === 'admin') {
     return <AdminLayout onNavigate={setCurrentPage} />;
@@ -119,6 +125,17 @@ const AppContent = () => {
             )}
           </div>
 
+        <div className="header-icons">
+          <div
+            className="wishlist-icon-wrapper"
+            onClick={() => setCurrentPage('wishlist')}
+            title="Yêu thích"
+          >
+            <span>❤️</span>
+            {wishlist.length > 0 && (
+              <span className="cart-badge">{wishlist.length}</span>
+            )}
+          </div>
           <div
             className="cart-icon-wrapper"
             onClick={() => setIsCartOpen(true)}
